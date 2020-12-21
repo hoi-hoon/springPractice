@@ -19,7 +19,7 @@ public class User {
     private String email;
     private String phoneNumber;
     private LocalDateTime createdAt;
-    private String createBy;
+    private String createdBy;
     private LocalDateTime updatedAt;
     private String updatedBy;
 
