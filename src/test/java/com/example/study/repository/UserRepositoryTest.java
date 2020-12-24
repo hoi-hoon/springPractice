@@ -18,30 +18,25 @@ public class UserRepositoryTest extends StudyApplicationTests {
 
     @Test
     public void create(){
-        // String sql = insert into  user (~~~) value (~~);
         User user = new User();
-        user.setAccount("testUser2");
-        user.setEmail("test2@mail.com");
-        user.setPhoneNumber("010-02-012");
+        user.setAccount("TEST_1");
+        user.setPassword("123123");
+        user.setStatus("REGISTERED");
+        user.setEmail("TEST_1@gmail.com");
+        user.setPhoneNumber("010-0000-0001");
+        user.setRegisteredAt(LocalDateTime.now());
         user.setCreatedAt(LocalDateTime.now());
-        user.setCreatedBy("admin");
+        user.setCreatedBy("AdminServer");
 
         User returnUser = userRepository.save(user);
-        System.out.println("returned :" + returnUser);
+        Assertions.assertNotNull(returnUser);
     }
 
     @Test
     @Transactional
     public void read(){
-        Optional<User> user = userRepository.findByAccount("testUser2");
-
-        user.ifPresent(selectUser ->{
-
-            selectUser.getOrderDetailList().stream().forEach(detail->{
-                System.out.println(detail.getItem());
-            });
-        });
-
+        User user = userRepository.findFirstByPhoneNumberOrderByIdDesc("010-0000-0001");
+        Assertions.assertNotNull(user);
     }
 
     @Test
