@@ -5,7 +5,6 @@ import com.example.study.model.entity.AdminUser;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 
 import java.time.LocalDateTime;
 
@@ -21,8 +20,10 @@ public class AdminUserRepositoryTest extends StudyApplicationTests {
         adminUser.setStatus("REGISTERED");
         adminUser.setRole("Partner");
 
+        /*
         adminUser.setCreatedAt(LocalDateTime.now());
         adminUser.setCreatedBy("AdminServer");
+        */
 
         AdminUser res = adminUserRepository.save(adminUser);
         Assertions.assertNotNull(res);

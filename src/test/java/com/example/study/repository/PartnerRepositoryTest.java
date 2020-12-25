@@ -24,7 +24,7 @@ public class PartnerRepositoryTest extends StudyApplicationTests {
         partner.setRegisteredAt(LocalDateTime.now());
         partner.setCreatedAt(LocalDateTime.now());
         partner.setCreatedBy("AdminServer");
-        partner.setCategoryId(1L);
+        // partner.setCategoryId(1L);
         Partner returnPartner = partnerRepository.save(partner);
 
         Assertions.assertNotNull(returnPartner);

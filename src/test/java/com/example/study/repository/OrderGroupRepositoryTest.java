@@ -28,7 +28,7 @@ public class OrderGroupRepositoryTest extends StudyApplicationTests {
 
         orderGroup.setCreatedAt(LocalDateTime.now());
         orderGroup.setCreatedBy("AdminServer");
-        orderGroup.setUserId(1L);
+        // orderGroup.setUserId(1L);
 
         OrderGroup res = orderGroupRepository.save(orderGroup);
         Assertions.assertNotNull(res);
