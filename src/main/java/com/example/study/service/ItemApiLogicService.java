@@ -15,12 +15,10 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
-public class ItemApiLogicService implements CrudInterface<ItemApiRequest, ItemApiResponse> {
+public class ItemApiLogicService extends BaseService<ItemApiRequest, ItemApiResponse, Item> {
     @Autowired
     private PartnerRepository partnerRepository;
 
-    @Autowired
-    private ItemRepository itemRepository;
 
     @Override
     public Header<ItemApiResponse> create(Header<ItemApiRequest> request) {
@@ -37,14 +35,14 @@ public class ItemApiLogicService implements CrudInterface<ItemApiRequest, ItemAp
                 .partner(partnerRepository.getOne(body.getPartnerId()))
                 .build();
 
-        Item newItem = itemRepository.save(item);
+        Item newItem = baseRepository.save(item);
 
         return response(newItem);
     }
 
     @Override
     public Header<ItemApiResponse> read(Long id) {
-        return itemRepository.findById(id)
+        return baseRepository.findById(id)
                 .map(item -> response(item))
                 .orElseGet(()->Header.Error("데이터 없음")
                 );
@@ -55,7 +53,7 @@ public class ItemApiLogicService implements CrudInterface<ItemApiRequest, ItemAp
 
         ItemApiRequest body = request.getData();
 
-        return itemRepository.findById(body.getId())
+        return baseRepository.findById(body.getId())
                 .map(item->{
                     item.setStatus(body.getStatus())
                             .setName(body.getName())
@@ -68,15 +66,15 @@ public class ItemApiLogicService implements CrudInterface<ItemApiRequest, ItemAp
                             ;
                     return item;
                 })
-                .map(res -> itemRepository.save(res))
+                .map(res -> baseRepository.save(res))
                 .map(item -> response(item))
                 .orElseGet(() -> Header.Error("데이터 없음"));
     }
 
     @Override
     public Header delete(Long id) {
-        return itemRepository.findById(id).map(item ->{
-            itemRepository.delete(item);
+        return baseRepository.findById(id).map(item ->{
+            baseRepository.delete(item);
             return Header.OK();
         }).orElseGet(() -> Header.Error("데이터 없음"));
     }
