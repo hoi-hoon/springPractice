@@ -2,6 +2,7 @@ package com.example.study.model.network.request;
 
 import com.example.study.model.entity.OrderDetail;
 import com.example.study.model.entity.User;
+import com.example.study.model.enumclass.OrderType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,7 +26,7 @@ import java.util.List;
 public class OrderGroupApiRequest {
     private Long id;
     private String status;
-    private String orderType;
+    private OrderType orderType;
     private String revAddress;
     private String revName;
     private String paymentType;
